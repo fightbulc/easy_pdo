@@ -3,6 +3,7 @@
     "description": "PDO MySQL Library",
     "homepage": "https://github.com/fightbulc/easy_pdo",
     "license": "BSD-2-Clause",
+    "keywords": ["db", "pdo", "mysql", "postgres", "sqlite"],
     "authors": [
         {
             "name": "Rob Poyntz",
