@@ -30,7 +30,6 @@ Originally coded as a private project using PHP's MySQLi drivers, EasyPDO evolve
 I had the need for named placeholders and implemented them. Further, I structured the lib to work with [Composer](http://getcomposer.org).
 
 # License
-Copyright (C) 2012 Robert Poyntz, Tino Ehrich  
+Copyright (C) 2010 Robert Poyntz  
 Robert Poyntz <rob@digitalfinery.com.au>  
-Tino Ehrich <opensource@efides.com>  
 http://www.opensource.org/licenses/bsd-license.php
