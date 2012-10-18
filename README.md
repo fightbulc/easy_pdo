@@ -24,10 +24,13 @@ Originally coded as a private project using PHP's MySQLi drivers, EasyPDO evolve
 - Help reduce programming errors
 - EasyPDO has been tested on MySQL v5.0, SQLite3 and Postgres v8.4. There is a good chance it will work with any of the other databases supported by PDO
 
-***Support for MySQLi has been dropped.***
+Support for MySQLi has been dropped.
 
 ### Why this Repo?
 I had the need for named placeholders and implemented them. Further, I structured the lib to work with [Composer](http://getcomposer.org).
+
+# Documentation / Examples
+Examples can be found on [Rob's page](http://easypdo.robpoyntz.com/examples).
 
 # License
 Copyright (C) 2010 Robert Poyntz  
