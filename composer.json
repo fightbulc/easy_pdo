@@ -1,8 +1,8 @@
 {
-    "name": "efides/EasyPDO",
+    "name": "efides/easy_pdo",
     "description": "PDO MySQL Library",
     "homepage": "https://github.com/fightbulc/EasyPDO",
-    "license": "BSD 2-Clause",
+    "license": "BSD-2-Clause",
     "authors": [
         {
             "name": "Rob Poyntz",
@@ -17,7 +17,7 @@
     "minimum-stability": "dev",
 
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.3"
     },
 
     "autoload": {
