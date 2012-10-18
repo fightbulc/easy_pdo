@@ -286,29 +286,31 @@
 
     /*
     * Binds values to the parameters in a PDOStatement object.
-    * $args is assumed to be an array, the first element of which specifies parameter types,
-    * the remaining elements being the parameter values. If the second argument is an array,
-    * it's elements are used as the parameter values
+    * $args is an assoc array which holds the keys/values for named parameters.
     * @param array $args
     */
     protected function BindParams($args)
     {
-      if (count($args) > 1)
+      if(isset($args[0]) && count($args[0]) > 0)
       {
-        if ((count($args) === 2) && is_array($args[1]))
+        /**
+         * bindParam: only pass value as reference:
+         * "...support the invocation of stored procedures that return data as output parameters,
+         * and some also as input/output parameters that both send in data and are updated to receive it."
+         */
+        foreach($args[0] as $key => &$value)
         {
-          array_splice($args, 1, 1, $args[1]);
-        }
+          $valueType = $this->getValueType($value);
+          $paramType = strtolower(substr($valueType['type'], 0, 1));
 
-        $types = str_split(array_shift($args));
-        if (count($types) !== count($args))
-        {
-          throw new EDatabaseException('Number of parameters does not equal number of parameter types');
-        }
+          // default param type would be s = string
+          if(! array_key_exists($paramType, $this->ParamTypes))
+          {
+            echo 'PARAM TYPE DOES NOT EXIST: ' . $key . '=>' . $value;
+            $paramType = 's';
+          }
 
-        for ($paramIndex = 0; $paramIndex < count($args); $paramIndex++)
-        {
-          $this->Query->bindParam(1 + $paramIndex, $args[$paramIndex], $this->ParamTypes[$types[$paramIndex]]);
+          $this->Query->bindParam(':' . $key, $value, $this->ParamTypes[$paramType]);
         }
       }
     }
