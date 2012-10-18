@@ -42,8 +42,6 @@
    * @package     EasyPDO
    * @version     0.1.6
    */
-  namespace EasyPDO;
-
   class EasyPDOException extends \Exception
   {
   }
