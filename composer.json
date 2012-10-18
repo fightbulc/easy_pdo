@@ -1,7 +1,7 @@
 {
-    "name": "efides/easy_pdo",
+    "name": "fightbulc/easy_pdo",
     "description": "PDO MySQL Library",
-    "homepage": "https://github.com/fightbulc/EasyPDO",
+    "homepage": "https://github.com/fightbulc/easy_pdo",
     "license": "BSD-2-Clause",
     "authors": [
         {
