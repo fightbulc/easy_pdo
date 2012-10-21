@@ -2,6 +2,7 @@
     "name": "fightbulc/easy_pdo",
     "description": "PDO MySQL Library",
     "homepage": "https://github.com/fightbulc/easy_pdo",
+    "version": "0.1.7",
     "license": "BSD-2-Clause",
     "keywords": ["db", "pdo", "mysql", "postgres", "sqlite"],
     "authors": [
