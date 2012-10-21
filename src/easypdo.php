@@ -118,7 +118,7 @@
     public function next()
     {
       $this->CurrentObj = $this->Query->fetch($this->FetchMode);
-      $this->Idx++;
+      $this->Idx ++;
     }
 
     public function key()
@@ -128,7 +128,7 @@
 
     public function valid()
     {
-      return ($this->CurrentObj !== false);
+      return ($this->CurrentObj !== FALSE);
     }
 
     public function rewind()
@@ -146,10 +146,12 @@
 
     private function SetFetchClass($className)
     {
-      if (!isset($className) || ($className == '')) {
+      if(! isset($className) || ($className == ''))
+      {
         throw new EasyPDOException('Invalid class specified for FETCH_MODE_CLASS');
       }
-      else if (!class_exists($className)) {
+      else if(! class_exists($className))
+      {
         throw new EasyPDOException('Specified class does not exist for FETCH_MODE_CLASS');
       }
 
@@ -171,7 +173,7 @@
     public function next()
     {
       $this->CurrentObj = $this->Query->fetchObject($this->FetchClass);
-      $this->Idx++;
+      $this->Idx ++;
     }
   }
 
@@ -192,7 +194,7 @@
     );
 
     protected static $FetchMode = EasyPDO::FETCH_MODE_OBJECT;
-    protected static $FetchClass = null;
+    protected static $FetchClass = NULL;
     protected static $Instance = array();
 
     private $LastSQL = '';
@@ -211,7 +213,7 @@
     /**
      * @var \PDOStatement
      */
-    protected $Query = null;
+    protected $Query = NULL;
 
     protected $QueryLog = array();
 
@@ -220,7 +222,6 @@
       $this->QueryLog[] = $sql;
     }
 
-
     /**
      * Sets the fetch mode for EasyPDO
      *
@@ -228,15 +229,15 @@
      *
      * @return void
      */
-    public static function SetFetchMode($mode, $className = null)
+    public static function SetFetchMode($mode, $className = NULL)
     {
-      if ($mode === EasyPDO::FETCH_MODE_CLASS)
+      if($mode === EasyPDO::FETCH_MODE_CLASS)
       {
-        if (!isset($className) || ($className == ''))
+        if(! isset($className) || ($className == ''))
         {
           throw new EasyPDOException('Invalid class specified for FETCH_MODE_CLASS');
         }
-        else if (!class_exists($className))
+        else if(! class_exists($className))
         {
           throw new EasyPDOException('Specified class does not exist for FETCH_MODE_CLASS');
         }
@@ -247,7 +248,7 @@
       }
       else
       {
-        EasyPDO::$FetchClass = null;
+        EasyPDO::$FetchClass = NULL;
       }
 
       EasyPDO::$FetchMode = $mode;
@@ -269,14 +270,14 @@
     * @param string $password
     * @throws ENoDatabaseConnection
     */
-    protected function __construct($connectionString, $username = null, $password = null)
+    protected function __construct($connectionString, $username = NULL, $password = NULL)
     {
       try
       {
         $this->PDO = new \PDO($connectionString, $username, $password);
         $this->PDO->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
       }
-      catch (\Exception $e)
+      catch(\Exception $e)
       {
         throw new ENoDatabaseConnection();
       }
@@ -335,7 +336,7 @@
     */
     public function Close()
     {
-      if ($this->Query)
+      if($this->Query)
       {
         unset($this->Query);
       }
@@ -354,7 +355,7 @@
     */
     public function StartTransaction()
     {
-      $this->Query = null;
+      $this->Query = NULL;
       $this->PDO->beginTransaction();
     }
 
@@ -363,7 +364,7 @@
     */
     public function CommitTransaction()
     {
-      $this->Query = null;
+      $this->Query = NULL;
       $this->PDO->commit();
     }
 
@@ -372,7 +373,7 @@
     */
     public function RollbackTransaction()
     {
-      $this->Query = null;
+      $this->Query = NULL;
       $this->PDO->rollBack();
     }
 
@@ -383,16 +384,16 @@
     */
     public function __destruct()
     {
-      $this->Query = null;
-      EasyPDO::$Instance = null;
+      $this->Query = NULL;
+      EasyPDO::$Instance = NULL;
     }
 
     private function PrepareSQL($sql)
     {
-      if ($sql != $this->LastSQL)
+      if($sql != $this->LastSQL)
       {
         $this->UpdateQueryLog($sql);
-        $this->Query = null;
+        $this->Query = NULL;
         $this->LastSQL = $sql;
         $this->Query = $this->PDO->prepare($sql);
       }
@@ -413,7 +414,7 @@
       $this->BindParams($args);
       $this->Query->execute();
 
-      if (EasyPDO::$FetchMode == EasyPDO::FETCH_MODE_CLASS)
+      if(EasyPDO::$FetchMode == EasyPDO::FETCH_MODE_CLASS)
       {
         return new QueryResultIteratorClass($this->Query, EasyPDO::GetFetchMode(), EasyPDO::$FetchClass);
       }
@@ -438,7 +439,7 @@
       array_shift($args);
       $this->BindParams($args);
       $this->Query->execute();
-      if (EasyPDO::$FetchMode === EasyPDO::FETCH_MODE_NUMERIC_ARRAY)
+      if(EasyPDO::$FetchMode === EasyPDO::FETCH_MODE_NUMERIC_ARRAY)
       {
         return $this->Query->fetch(\PDO::FETCH_NUM);
       }
@@ -463,13 +464,13 @@
       $this->BindParams($args);
       $this->Query->execute();
       $result = $this->Query->fetch(\PDO::FETCH_NUM);
-      if ($result && (count($result) > 0))
+      if($result && (count($result) > 0))
       {
         return $result[0];
       }
       else
       {
-        return null;
+        return NULL;
       }
     }
 
@@ -487,7 +488,7 @@
       array_shift($args);
       $this->BindParams($args);
       $this->Query->execute();
-      if (EasyPDO::$FetchMode == EasyPDO::FETCH_MODE_CLASS)
+      if(EasyPDO::$FetchMode == EasyPDO::FETCH_MODE_CLASS)
       {
         return $this->Query->fetch(\PDO::FETCH_CLASS, EasyPDO::$FetchClass);
       }
@@ -512,7 +513,7 @@
       array_shift($args);
       $this->BindParams($args);
       $this->Query->execute();
-      if (EasyPDO::$FetchMode == EasyPDO::FETCH_MODE_CLASS)
+      if(EasyPDO::$FetchMode == EasyPDO::FETCH_MODE_CLASS)
       {
         return $this->Query->fetchAll(EasyPDO::GetFetchMode(), EasyPDO::$FetchClass);
       }
@@ -532,7 +533,7 @@
       // Use the generic \PDO "lastInsertId" method.
       // Not all database engines support this feature. Those that do often have differing implementations.
       // This method may be overriden as required
-      return ($this->PDO->lastInsertId() > 0) ? $this->PDO->lastInsertId() : null;
+      return ($this->PDO->lastInsertId() > 0) ? $this->PDO->lastInsertId() : NULL;
     }
 
     /*
@@ -545,9 +546,9 @@
     public function ExecuteSQL($sql)
     {
       $this->UpdateQueryLog($sql);
-      if (!isset($this->Query) || ($this->LastSQL != $sql))
+      if(! isset($this->Query) || ($this->LastSQL != $sql))
       {
-        $this->Query = null;
+        $this->Query = NULL;
         $this->LastSQL = $sql;
         $this->Query = $this->PDO->prepare($sql);
       }
@@ -559,9 +560,9 @@
       {
         $this->Query->execute();
       }
-      catch (\PDOException $e)
+      catch(\PDOException $e)
       {
-        if ($e->getCode() == ERROR_DUPLICATE_KEY)
+        if($e->getCode() == ERROR_DUPLICATE_KEY)
         {
           throw new EDuplicateKey($e->getMessage());
         }
@@ -579,4 +580,70 @@
       return $this->QueryLog;
     }
 
+    protected function getValueType($value, $max_length = 50)
+    {
+      $type = gettype($value);
+
+      if($type == 'NULL' || $type == 'boolean' || $type == 'integer' || $type == 'double' || $type == 'object' || $type == 'resource' || $type == 'array')
+      {
+        return array(
+          'type'  => $type,
+          'value' => $value
+        );
+      }
+
+      if($type == 'string' && empty($value))
+      {
+        return array(
+          'type'  => 'NULL',
+          'value' => $value
+        );
+      }
+
+      if($type == 'string' && strlen($value) > $max_length)
+      {
+        return array(
+          'type'  => 'blob',
+          'value' => $value
+        );
+      }
+
+      if($type == 'string' && substr($value, 0, 1) === '0')
+      {
+        return array(
+          'type'  => 'string',
+          'value' => $value
+        );
+      }
+
+      if($type == 'string' && is_numeric($value))
+      {
+        $int = (int)$value;
+        $float = (float)$value;
+
+        if($int == $value)
+        {
+          $value = $int;
+          $type = 'integer';
+        }
+        elseif($float == $value)
+        {
+          $value = $float;
+          $type = 'double';
+        }
+      }
+      elseif($type == 'string')
+      {
+        $type = 'string';
+      }
+      else
+      {
+        $type = 'blob';
+      }
+
+      return array(
+        'type'  => $type,
+        'value' => $value
+      );
+    }
   }
