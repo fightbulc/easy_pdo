@@ -207,6 +207,7 @@
       'i' => \PDO::PARAM_INT,
       'd' => \PDO::PARAM_STR,
       's' => \PDO::PARAM_STR,
+      'n' => \PDO::PARAM_STR,
       'b' => \PDO::PARAM_LOB
     );
 
@@ -305,7 +306,7 @@
           // default param type would be s = string
           if(! array_key_exists($paramType, $this->ParamTypes))
           {
-            echo 'PARAM TYPE DOES NOT EXIST: ' . $key . '=>' . $value;
+            echo 'PARAM TYPE DOES NOT EXIST: ' . $key . '=>' . $value . ' (' . $valueType['type'] . ')';
             $paramType = 's';
           }
 
