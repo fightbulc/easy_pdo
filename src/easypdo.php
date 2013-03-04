@@ -195,7 +195,7 @@
 
     protected static $FetchMode = EasyPDO::FETCH_MODE_OBJECT;
     protected static $FetchClass = NULL;
-    protected static $Instance = array();
+    protected static $Instance = NULL;
 
     private $LastSQL = '';
 
